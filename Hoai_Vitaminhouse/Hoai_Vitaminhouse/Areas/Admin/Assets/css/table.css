@@ -1,0 +1,35 @@
+table .see-details{
+    text-align: center;
+}
+table .see-details i{
+    color: blue;
+    font-size: 20px;
+}
+table .see-details i:hover {
+    color:#0101DF;
+    cursor: pointer;
+}
+
+table .edit{
+    text-align: center;
+}
+table .edit i{
+    color: #FF8000;
+    font-size: 20px;
+}
+table .edit i:hover{
+    color: #DBA901;
+    cursor: pointer;
+}
+
+table .remove{
+    text-align: center;
+}
+table .remove i{
+    color: red;
+    font-size: 20px;
+}
+table .remove i:hover{
+    color: #B40404;
+    cursor: pointer;
+}

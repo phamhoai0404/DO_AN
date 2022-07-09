@@ -1,0 +1,124 @@
+﻿@model Hoai_Vitaminhouse.Models.Account
+
+@{
+    ViewBag.Title = "Chi tiết khách hàng #" + Model.AccountId;
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="flex-jc">
+    <div class="h-detail " style="padding: 20px 100px; margin-bottom:20px;">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã khách hàng:</div>
+                <div>#@Model.AccountId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Họ tên :</div>
+                <div>@Model.AccountName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Số điện thoại :</div>
+                <div>@Model.AccountPhone</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Email :</div>
+                <div>@Model.AccountEmail</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Địa chỉ :</div>
+                <div>@Model.AccountAddress</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Trạng thái :</div>
+                <div>
+                    @{
+                        string trangThai = "";
+                        if (Model.AccountStatus == true) { trangThai = "Hoạt động"; }
+                        else { trangThai = "Đang bị khóa"; }
+
+                    }
+
+                    @trangThai
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="background: white; padding: 20px;">
+    <div class="row">
+        <div class="col-lg-12">
+            @if (ViewBag.listDonHangByMaTK.Count > 0)
+            {
+                <table class="m-table-fe">
+                    <thead>
+                        <tr>
+                            <th class="first">Mã đơn hàng</th>
+                            <th>Địa chỉ giao hàng</th>
+                            <th>Tổng tiền</th>
+                            <th>Ngày đặt</th>
+                            <th>Trạng thái</th>
+                            <th class="last">Xem chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < ViewBag.listDonHangByMaTK.Count; i++)
+                        {
+                            <tr>
+                                <td style="border-left:none !important;"><div>@ViewBag.listDonHangByMaTK[i].OrderId</div></td>
+                                <td>
+                                    <div>
+                                        @ViewBag.listDonHangByMaTK[i].OrderAddress
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @string.Format("{0:#,##}", ViewBag.listDonHangByMaTK[i].OrderTotalMoney) <u>đ</u>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @ViewBag.listDonHangByMaTK[i].OrderDate
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        
+                                        @{
+                                            string tinhTrang = "";
+                                            if (ViewBag.listDonHangByMaTK[i].OrderStatus == 1) { tinhTrang = "Chờ xử lý"; }
+                                            else if (ViewBag.listDonHangByMaTK[i].OrderStatus == 2) { tinhTrang = "Đang giao"; }
+                                            else if (ViewBag.listDonHangByMaTK[i].OrderStatus == 3) { tinhTrang = "Đã giao"; }
+                                            else { tinhTrang = "Đã hủy"; }
+                                        }
+                                        @tinhTrang
+                                    </div>
+                                </td>
+                                <td class="m-table-function-s">
+                                    <a href="@Url.Action("Details","Orders",new {id = @ViewBag.listDonHangByMaTK[i].OrderId })">
+                                        <i class="bi bi-eye-fill" style="color: blue;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+
+            }
+            else
+            {
+                <div class="flex-jc">Khách hàng chưa có đơn hàng nào!</div>
+            }
+      </div>
+    </div>
+</div>
+
+<div class="h-group-function-detail" style="margin-top:20px;">
+    <div class="h-function-detail-item flex-jc">
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+</div>
+

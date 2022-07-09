@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Newspaper>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="m-title-ca m-left-right-newspapers">
+    <a href="@Url.Action("Index", "Home")" class="m-title-2" >Trang chủ</a>&nbsp; 
+    <i class="fas fa-chevron-right"></i> &nbsp;
+    <div class="m-title-2">Blog Vitamin</div>
+</div>
+<div class="m-title-newspaper-header m-left-right-newspapers">
+    BLOG VITAMIN
+</div>
+<div class="m-newspaper-group m-left-right-newspapers">
+    <div class="m-right-newspaper">
+        <div class="m-newspaper-one">
+            @if (ViewBag.NewspaperLast != null)
+            {
+                <div class="m-one-newspaper-img" style="height: 465px">
+                    <a href="@Url.Action("Details","Newspapers",  new { id = ViewBag.NewspaperLast.NewspaperId })">
+                        @{
+                            string ImagePath = "";
+                            if (ViewBag.NewspaperLast.NewspaperImage != null)
+                            {
+                                ImagePath = "~/wwwroot/img/newspapers/" + ViewBag.NewspaperLast.NewspaperImage;
+                            }
+                            else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                        }
+
+                        <img src="@Url.Content(ImagePath)" height="465" />
+                       
+                    </a>
+                </div>
+                <a href="@Url.Action("Details","Newspapers",  new { id = ViewBag.NewspaperLast.NewspaperId })">
+                    <div class="m-title-newspaper" style="margin-top: 20px;font-size: 30px;">@ViewBag.NewspaperLast.NewspaperTitle</div>
+                </a>
+                <div style="font-size: 16px;"> Ngày tạo: @ViewBag.NewspaperLast.NewspaperDate</div>
+            }
+
+        </div>
+        <div class="m-newspaper-list">
+            @foreach (var item in Model)
+            {
+                <div class="m-newspasper-item">
+                    <div class="m-one-newspaper-img" style="height: 224px">
+                        <a href="@Url.Action("Details","Newspapers",  new { id = item.NewspaperId })">
+                            @{
+                                string ImagePath2 = "";
+                                if (item.NewspaperImage != null)
+                                {
+                                    ImagePath2 = "~/wwwroot/img/newspapers/" + item.NewspaperImage;
+                                }
+                                else { ImagePath2 = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                            }
+
+                            <img src="@Url.Content(ImagePath2)" height="224" />
+
+                        </a>
+                    </div>
+                    <a  href="@Url.Action("Details","Newspapers",  new { id = item.NewspaperId })">
+                        <div class="m-title-newspaper" style="margin-top: 10px;font-size: 22px;"> @item.NewspaperTitle</div>
+                    </a>
+                    <div style="font-size: 16px;"> Ngày tạo: @item.NewspaperDate </div>
+                </div>
+             }
+                
+        </div>
+    </div>
+    <div class="m-left-newspaper">
+        <div class="m-thankyou-title">CẢM ƠN QUÝ KHÁCH HÀNG ĐÃ GHÉ THĂM VITAMINHOUSE.VN</div>
+        <div style=" white-space: pre-line;">Vitamin House luôn tìm kiếm, đào sâu trong chuyên môn với mong muốn mang đến những thông tin thực sự hữu ích và có giá trị để cảm ơn quý khách hàng dành chút thời gian ghé qua website của chúng tôi.
+            Vitamin House luôn cố gắng mỗi ngày để mang đến cho khách hàng những sản phẩm mới với chất lượng tốt nhất. Bên cạnh các nhu yếu phẩm, chúng tôi cũng thường xuyên cập nhật các xu hướng của người tiêu dùng.
+            Chúng tôi mong muốn khách hàng đến Vitamin House không chỉ mua hàng, mà còn được tư vấn, hỗ trợ tốt nhất để chọn được những sản phẩm ngoại nhập phù hợp bản thân và gia đình.
+        </div>
+    </div>
+</div>
+
+<div class="m-paging-group">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   });
+</div>

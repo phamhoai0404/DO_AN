@@ -1,0 +1,22 @@
+﻿.h-detail {
+    background: white;
+    padding: 20px;
+    
+}
+    .h-detail .h-detail-item {
+        padding-bottom: 20px;
+    }
+.h-detail .h-detail-title {
+    min-width: 160px;
+    font-weight: bold;
+    color: #18543B;
+}
+    .h-detail .h-detail-detail {
+        min-width: 400px;
+        max-width: 600px;
+    }
+        .h-detail .h-detail-detail p {
+            white-space: pre-line;
+            text-align: justify;
+            line-height: 35px;
+        }

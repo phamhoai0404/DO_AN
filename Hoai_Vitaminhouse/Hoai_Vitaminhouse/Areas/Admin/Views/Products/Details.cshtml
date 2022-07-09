@@ -1,0 +1,65 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Product
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm #" + @Model.ProductId;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="flex-jc">
+    <div class="h-detail ">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex-jc">
+                @{
+                    string ImagePath = "";
+                    if (Model.ProductImage != null) { ImagePath = "~/wwwroot/img/sanpham/" + Model.ProductImage; }
+                    else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                }
+                <img src="@Url.Content(ImagePath)" class="m-img-order" style="width: 250px;" />
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã sản phẩm:</div>
+                <div>#@Model.ProductId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Tên sản phẩm:</div>
+                <div>@Model.ProductName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Tên danh mục:</div>
+                <div>@Model.Category.CategoryName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Nhà cung cấp:</div>
+                <div>@Model.ProductProviders</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Giá tiền:</div>
+                <div> @string.Format("{0:#,##}", Model.ProductPrice) <u>đ</u></div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Giảm giá:</div>
+                <div>@Model.ProductDiscount %</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Số lượng tồn:</div>
+                <div>@string.Format("{0:#,##}", Model.ProductNumber)</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Đơn vị:</div>
+                <div>@Model.ProductUnit</div>
+            </div>
+            <div class="h-detail-item ">
+                <div class="h-detail-title">Mô tả sản phẩm:</div>
+                <div class="h-detail-detail">
+                    <p>@Model.ProductDescription</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-group-function-detail">
+            <div class="h-function-detail-item flex-jc">
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        </div>
+    </div>
+</div>

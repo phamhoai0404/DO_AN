@@ -1,0 +1,107 @@
+﻿
+@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Product>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="m-title-ca">
+    <a href="@Url.Action("Index", "Home")"  class="m-title-2" >Trang chủ</a>&nbsp; <i class="fas fa-chevron-right"></i> &nbsp;
+    <a href="@Url.Action("Details","Categories",new { id = ViewBag.Category.CategoryId})" class="m-title-2" >@ViewBag.Category.CategoryName </a>
+</div>
+
+<div class="m-category-group">
+    <div class="m-category-image">
+        <img src="~/wwwroot/img/products/hat-de-cuoi-kirkland-pistachios-1_36kg-my-5_4ac6556a4fcf4809a9447ad7562fea52_1000x.jpg" sizes="1082px" />
+    </div>
+    <div class="m-category-name">
+        @ViewBag.Category.CategoryName
+    </div>
+    <div class="m-category-description">
+        @ViewBag.Category.CategoryDescription
+    </div>
+</div>
+
+<div class="m-container-product" style=" display: flex; justify-content: center;">
+    <div class="m-product-group">
+        @foreach (var item in Model)
+        {
+        <div class="m-product-item">
+            <div class="m-product-img">
+                <a href="@Url.Action("Details","Products",  new { id = item.ProductId })">
+                    @{
+                        string ImagePath = "";
+                        if (item.ProductImage != null)
+                        {
+                            ImagePath = "~/wwwroot/img/sanpham/" + item.ProductImage;
+                        }
+                        else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                    }
+
+                    <img src="@Url.Content(ImagePath)" height="250" />
+                </a>
+            </div>
+            @if (item.ProductDiscount > 0)
+            {
+                <div class="m-product-discount">
+                    <div class="m-title-discount">GIẢM</div>
+                    <div class="m-number-discount">
+                        @item.ProductDiscount%
+                    </div>
+                </div>
+            }
+            <div class="m-product-content">
+                <div class="m-product-name" style="min-height:60px;">
+                    <a href="@Url.Action("Details","Products",  new { id = item.ProductId })">  @item.ProductName</a>
+                </div>
+                <div class="m-product-price-group">
+                    @if (item.ProductDiscount > 0)
+                    {
+                        decimal priceDiscount = (decimal)@item.ProductDiscount * @item.ProductPrice / 100;
+                        decimal priceLast = @item.ProductPrice - priceDiscount;
+
+                        <div class="m-product-price" style="margin-right:10px;">@string.Format("{0:#,##}", priceLast) <u>đ</u></div>
+                        <div class="m-product-last"> @string.Format("{0:#,##}", item.ProductPrice) <u>đ</u></div>
+                    }
+                    else
+                    {
+                        <div class="m-product-price">@string.Format("{0:#,##}", item.ProductPrice) <u>đ</u></div>
+                    }
+                </div>
+            </div>
+            @if (item.ProductNumber > 0)
+            {
+                <a href=@Url.Action("ThemGioHang", "Cart", new { iMaHang = item.ProductId, strURL = Request.Url.ToString() })>
+                    <div class="m-function-product">
+
+                        <i class="fas fa-shopping-cart"></i> &nbsp;&nbsp;
+                        <div class="m-function-title">THÊM VÀO GIỎ</div>
+
+                    </div>
+                </a>
+            }
+            else
+            {
+                <a href="" onclick="showErrorNotNumberProduct()" >
+                    <div class="m-function-product" style="background: #5FCEA0 !important; border-color: #5FCEA0 ">
+                        <div class="m-function-title">HẾT HÀNG</div>
+
+                    </div>
+                </a>
+            }
+
+        </div>
+        }
+
+    </div>
+</div>
+
+<div class="m-paging-group">
+
+    @Html.PagedListPager(Model, page => Url.Action("Details", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   });
+</div>

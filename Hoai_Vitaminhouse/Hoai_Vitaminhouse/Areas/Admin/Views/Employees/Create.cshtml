@@ -1,0 +1,90 @@
+﻿@model Hoai_Vitaminhouse.Models.Account
+
+@{
+
+    ViewBag.Title = "Thêm nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.AccountRole)
+    @Html.HiddenFor(model => model.AccountStatus)
+    <div class="chitiet">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Họ và tên:</div>
+                    @Html.EditorFor(model => model.AccountName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">SĐT nhân viên: </div>
+                    @Html.EditorFor(model => model.AccountPhone, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Địa chỉ: </div>
+                    @Html.EditorFor(model => model.AccountAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Email: </div>
+                    @Html.EditorFor(model => model.AccountEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AccountEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Mật khẩu mới: </div>
+                    @Html.EditorFor(model => model.AccountPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AccountPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Xác nhận mật khẩu: </div>
+                    <input type="password" name="confirmPasswordBEEmployee2" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success">
+                        Thêm
+                    </button> &nbsp; | &nbsp;
+
+                    @Html.ActionLink("Hủy", "Index")
+
+                </div>
+                <br />
+
+            </div>
+            <div class="row mt-5">
+                @if (ViewBag.ErrorCreateEmployeeBE != null)
+                {
+                    <br />
+                    <div class="alert alert-danger" role="alert">@ViewBag.ErrorCreateEmployeeBE</div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+<style>
+    .chitiet .container .row .col-12 {
+        margin-bottom: 7px;
+    }
+</style>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

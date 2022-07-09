@@ -1,0 +1,14 @@
+﻿.flex{
+    display:flex;
+}
+.flex-jsb {
+    display: flex;
+    justify-content:space-between;
+}
+.flex-jc{
+    display:flex;
+    justify-content:center;
+}
+.form-control[readonly] {
+    background: #f0ffdf !important;
+}

@@ -1,0 +1,76 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Account
+
+@{
+    
+    ViewBag.Title = "Thông tin đăng nhập ";
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="flex-jc">
+    <div class="h-detail " style="padding: 20px 100px; margin-bottom:20px;">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã tài khoản:</div>
+                <div>#@Model.AccountId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Họ tên :</div>
+                <div>@Model.AccountName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Số điện thoại :</div>
+                <div>@Model.AccountPhone</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Email :</div>
+                <div>@Model.AccountEmail</div>
+            </div>
+
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Trạng thái :</div>
+                <div>
+                    @{
+                        string trangThai = "";
+                        if (Model.AccountStatus == true) { trangThai = "Hoạt động"; }
+                        else { trangThai = "Đang bị khóa"; }
+                    }
+                    @trangThai
+                </div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Quyền:</div>
+                <div>
+                    @{
+                        string quyen = "";
+                        if (Model.AccountRole == 2) { quyen = "Nhân viên"; }
+                        if (Model.AccountRole == 3) { quyen = "Quản lý"; }
+                    }
+                    @quyen
+                </div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Địa chỉ :</div>
+                <div>@Model.AccountAddress</div>
+            </div>
+            <div class="h-group-function-detail">
+                <div class="h-function-detail-item flex-jc">
+
+                    <div class="col-md-offset-2 col-md-12 text-center">
+                        <button type="button" class="btn btn-danger" style="margin-top:10px">
+                            <a href="@Url.Action("Logout","Access")" style="color: white;">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Đăng xuất
+                            </a>
+                        </button>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

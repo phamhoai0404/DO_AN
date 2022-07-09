@@ -1,0 +1,52 @@
+﻿@model  Hoai_Vitaminhouse.Models.Newspaper
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="m-title-ca m-left-right-newspapers">
+    <a href="@Url.Action("Index", "Home")" class="m-title-2">Trang chủ</a>&nbsp;
+    <i class="fas fa-chevron-right"></i> &nbsp;
+    <a href="@Url.Action("Index", "Newspapers")" class="m-title-2" >Blog Vitamin</a>&nbsp;
+    <i class="fas fa-chevron-right"></i> &nbsp;
+    <div >Chi tiết</div>&nbsp;
+</div>
+<div class="m-newspaper-group m-left-right-newspapers">
+    <div class="m-right-newspaper">
+        <div class="m-np-title">
+            @Model.NewspaperTitle
+        </div>
+        <div style="font-size: 16px;">
+            Ngày tạo: @Model.NewspaperDate
+        </div>
+        <div class="m-np-img">   
+            @{
+                string ImagePath = "";
+                if (Model.NewspaperImage != null)
+                {
+                    ImagePath = "~/wwwroot/img/newspapers/" + Model.NewspaperImage;
+                }
+                else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+            }
+
+            <img src="@Url.Content(ImagePath)" />
+        </div>
+        <div style="white-space:pre-line; text-align: justify;">
+            @Model.NewspaperDescription
+        </div>
+        
+    </div>
+    <div class="m-left-newspaper">
+        <div class="m-thankyou-title">CẢM ƠN QUÝ KHÁCH HÀNG ĐÃ GHÉ THĂM VITAMINHOUSE.VN</div>
+        <div style=" white-space: pre-line;">Vitamin House luôn tìm kiếm, đào sâu trong chuyên môn với mong muốn mang đến những thông tin thực sự hữu ích và có giá trị để cảm ơn quý khách hàng dành chút thời gian ghé qua website của chúng tôi.
+            Vitamin House luôn cố gắng mỗi ngày để mang đến cho khách hàng những sản phẩm mới với chất lượng tốt nhất. Bên cạnh các nhu yếu phẩm, chúng tôi cũng thường xuyên cập nhật các xu hướng của người tiêu dùng.
+            Chúng tôi mong muốn khách hàng đến Vitamin House không chỉ mua hàng, mà còn được tư vấn, hỗ trợ tốt nhất để chọn được những sản phẩm ngoại nhập phù hợp bản thân và gia đình.
+        </div>
+    </div>
+</div>
+<div class="m-fo-np m-left-right-newspapers">
+    <a href="@Url.Action("Index", "Newspapers")">
+        <i class="fas fa-long-arrow-alt-left"></i> &nbsp;&nbsp;
+        Xem Blog khác
+    </a>
+</div>
+
+

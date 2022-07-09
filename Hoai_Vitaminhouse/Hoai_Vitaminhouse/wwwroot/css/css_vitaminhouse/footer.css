@@ -1,0 +1,42 @@
+﻿/* new css start here */
+.m-footer {
+    color: #ffffff;
+    background-color: #EFFBEF;
+    padding: 50px 0 80px;
+    border-top: 2px solid #18543b;
+    margin-top: 10px;
+    font-size: 16px;
+    color:#677279;
+    padding: 30px 100px 0 100px;
+}
+    .m-footer .m-footer-bottom{
+        text-align:center;
+        padding-bottom:20px;
+        padding-top:50px;
+    }
+    .m-footer .m-footer-top {
+        display:flex;
+        justify-content:space-between;
+    }
+.m-footer-left{
+    width: 35%;
+    
+}
+    .m-footer-left p.m-content-footer {
+        font-size: 16px;
+        color: #677279;
+        text-align:justify;
+        margin-top:10px;
+    }
+.m-footer-right{
+    padding-right:100px;
+}
+.m-footer-right li{
+    padding: 6px 0;
+    margin:2px 0;
+}
+    .m-footer-right li:hover {
+        cursor: pointer;
+        padding-left: 5px;
+        color: #18543b; font-size:17px;
+    }

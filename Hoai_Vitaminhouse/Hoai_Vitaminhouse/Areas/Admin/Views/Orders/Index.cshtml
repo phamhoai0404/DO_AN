@@ -1,0 +1,103 @@
+﻿@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Order>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách đơn hàng";
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section CSSPartial{
+    <link href="~/Areas/Admin/Assets/css/table.css" rel="stylesheet">
+}
+<div style="background: white; padding: 20px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="m-table-fe">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Tên người nhận</th>
+                        <th>Ngày đặt</th>
+                        <th>Tổng tiền</th>
+                        <th>Tình trạng</th>
+                        <th>Địa chỉ giao hàng</th>
+                        <th colspan="2" class="last">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="border-left:none !important;"><div><b>@item.OrderId</b></div></td>
+                        <td>
+                            <div>
+                                @item.OrderRecipientName
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @item.OrderDate.ToString(string.Format("dd/MM/yyyy"))
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @string.Format("{0:#,##}", item.OrderTotalMoney) <u>đ</u>
+                            </div>
+                        </td>
+                        
+                        <td style="font-weight: bold;">
+                            @{
+                                string tinhTrang = "";
+                                if (item.OrderStatus == 1) { tinhTrang = "Chờ xử lý"; }
+                                else if (item.OrderStatus == 2) { tinhTrang = "Đang giao"; }
+                                else if (item.OrderStatus == 3) { tinhTrang = "Đã giao"; }
+                                else { tinhTrang = "Đã hủy"; }
+                            }
+                             @if (item.OrderStatus == 1) { <div>@tinhTrang</div>}
+                              else if (item.OrderStatus == 2) { <div style="color:green;">@tinhTrang</div>}
+                              else if (item.OrderStatus == 3) { <div style="color:orange;">@tinhTrang</div>}
+                              else { <div style="color: red;">@tinhTrang</div>}
+                              
+                            
+                        </td>
+                        <td>@item.OrderAddress</td>
+                        <td class="m-table-function-s" title="Xem chi tiết đơn hàng">
+                            <a href="@Url.Action("Details","Orders",new {id = item.OrderId})">
+                                <i class="bi bi-eye-fill" style="color: blue;"></i>
+                            </a>
+                        </td>
+                        <td class="m-table-function-s">
+                            @if (item.OrderStatus == 1 || item.OrderStatus == 2)
+                            {
+                                <a href="@Url.Action("Edit", "Orders", new { id = item.OrderId })" title="Sửa tình trạng đơn hàng">
+                                    <i class="bi bi-pencil-fill" style="color: orange;"></i>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="" title="Không sửa tình trạng đơn hàng">
+                                    <i class="bi bi-pencil-fill" style="color: orange; opacity:0.3;"></i>
+                                </a>
+                            }
+
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row padding-table">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   })
+
+</div>

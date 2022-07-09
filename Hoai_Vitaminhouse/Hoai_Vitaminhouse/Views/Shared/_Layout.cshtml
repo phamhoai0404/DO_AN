@@ -1,0 +1,59 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <title>Cửa Hàng Đồ ăn vặt Vitamin House</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, shrink-to-fit=9" />
+
+    <meta name="description" content="Home supermarket" />
+
+    <meta name="author" content="Home Grocerino" />
+
+    <link rel="icon" type="image/png" href="~/wwwroot/img/logos/logo_3.png" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @{Html.RenderPartial("_Style");}
+
+
+</head>
+
+<body class="grocino-home">
+
+    <!-- Top header start -->
+    @{ Html.RenderAction("_Navbar", "Base"); }
+    <!-- Start Hero Slide-->
+
+
+    @RenderBody()
+
+
+    <!-- ======= Footer ======= -->
+    @Html.Partial("_Footer")
+    <!-- End Footer -->
+    <!-- JS -->
+    @{Html.RenderPartial("_Script");}
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF3SVYD2YD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-GF3SVYD2YD');
+    </script>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>

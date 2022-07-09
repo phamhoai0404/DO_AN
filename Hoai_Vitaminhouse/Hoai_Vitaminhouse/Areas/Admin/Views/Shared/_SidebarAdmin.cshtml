@@ -1,0 +1,74 @@
+﻿
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-heading" style="margin-top: 0px; color: #18543b;">Quản lý</li>
+
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Home" ? "active": "" )" href="@Url.Action("Index","Home")">
+                <i class="bi bi-grid"></i>
+                <span>Thống kê</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Categories" ? "active": "" ) " href="@Url.Action("Index","Categories")">
+                <i class="bi bi-folder2-open"></i>
+                <span>Danh mục</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Newspapers" ? "active": "" ) " href="@Url.Action("Index","Newspapers")">
+                <i class="bi bi-newspaper"></i>
+                <span>Tin tức</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Products" ? "active": "" ) " href="@Url.Action("Index","Products")">
+                <i class="bi bi-box-seam"></i>
+                <span>Sản phẩm</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Orders" ? "active": "" ) " href="@Url.Action("Index","Orders")">
+                <i class="bi bi-bag"></i>
+                <span>Đơn hàng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Customers" ? "active": "" ) " href="@Url.Action("Index","Customers")">
+                <i class="bi bi-person-circle"></i>
+                <span>Khách hàng</span>
+            </a>
+        </li>
+        @if (Convert.ToInt32(Session["roleAdmin"]) == 3)
+        {
+    <li class="nav-item">
+        <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Employees" ? "active" : "" ) " href="@Url.Action("Index", "Employees")">
+            <i class="bi bi-person-square"></i>
+            <span>Nhân viên</span>
+        </a>
+    </li>}
+
+        <li class="nav-heading" style="padding-top: 10px; color: #18543b;">Cá nhân</li>
+
+        <li class="nav-item">
+            <a class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Accounts"  && ViewContext.RouteData.Values["Action"].ToString() == "Index")? "active": "" ) " href="@Url.Action("Index","Accounts")">
+                <i class="bi bi-person"></i>
+                <span>Tài khoản</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Accounts" && ViewContext.RouteData.Values["Action"].ToString() == "ChangeInfo"? "active": "" ) " href="@Url.Action("ChangeInfo","Accounts")">
+                <i class="bi bi-pencil-square"></i>
+                <span>Sửa tài khoản</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link @(ViewContext.RouteData.Values["Controller"].ToString() == "Accounts" && ViewContext.RouteData.Values["Action"].ToString() == "ChangePassword"? "active": "" ) " href="@Url.Action("ChangePassword","Accounts")">
+                <i class="bi bi-key"></i>
+                <span>Đổi mật khẩu</span>
+            </a>
+        </li>
+    </ul>
+
+</aside>

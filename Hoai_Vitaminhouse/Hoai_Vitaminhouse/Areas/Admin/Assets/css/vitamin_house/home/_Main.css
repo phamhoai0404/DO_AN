@@ -1,0 +1,11 @@
+﻿.pagetitle h1 {
+    font-size: 35px;
+    margin-bottom: 0;
+    font-weight: 600;
+    color: #18543b;    
+}
+.flex-jc-ac{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}

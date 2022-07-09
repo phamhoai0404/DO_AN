@@ -1,0 +1,189 @@
+﻿@model  Hoai_Vitaminhouse.Models.Order
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="breadcrumb-wrapper" class="breadcrumb-w-img" style="background-image: url(/wwwroot/img/products/bg_sanpham_6.jpg); ">
+
+    <div class="breadcrumb-overlay"></div>
+    <div class="breadcrumb-content">
+        <div class="wrapper">
+            <div style="text-align: center;">
+                <div class="breadcrumb-big">
+                    <h2 style="font-size: 38px;">
+                        THANH TOÁN
+                    </h2>
+
+                </div>
+                <div class="breadcrumb-small" style="font-size: 20px; padding-top: 10px;">
+                    <a href="@Url.Action("Index","Home")" title="">TRANG CHỦ</a>
+
+
+                    <span aria-hidden="true">/</span>
+                    <span>THANH TOÁN</span>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="grocino-form">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto flex-jc">
+                <form method ="post" class=" form-signin-two m-login-account- m-resss-fe ">
+                    @Html.AntiForgeryToken()
+                    <div class="ui form">
+                        <div class="ui left icon input w-100 ">
+                            <h1 class="m-title-login-account">THÔNG TIN NGƯỜI NHẬN</h1>
+
+                        </div>
+                        <br /><br />
+                        <div class="field">
+                            <div class="ui left icon input w-100 ">
+                                @Html.EditorFor(model => model.OrderRecipientName, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Họ tên người nhận" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.OrderRecipientName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input w-100 ">
+                                @Html.EditorFor(model => model.OrderRecipientPhone, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Số điện thoại người nhận" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.OrderRecipientPhone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="field">
+                            <div class="ui left icon input w-100 ">
+                                @Html.EditorFor(model => model.OrderAddress, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Địa chỉ giao hàng" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.OrderAddress, "", new { @class = "text-danger" })
+                        </div>
+                       
+                        <button class="m-button-login-fe" type="submit" style="margin-top: 20px;">Đặt hàng</button>
+                        
+                        <div class="m-footer-login">
+                            Bạn muốn thay đổi sản phẩm trong đơn hàng?
+                            <span>
+                                <a href="@Url.Action("Index", "Cart")">Click tại đây</a>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="m-container-content" style="margin-left:90px; margin-right:90px; margin-top: -20px !important;">
+    <div class="m-account-ft-group" >
+        <div class="flex-jsb" style="align-items:center;">
+            <div class="m-account-ft-title">CHI TIẾT HÀNG THANH TOÁN</div>
+        </div>
+
+        <div class="m-account-ft-content">
+            <table class="m-table-fe" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th style="max-width: 106px;">Giảm</th>
+                        <th>Số lượng</th>
+                        <th>Tính Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ViewBag.ListCart.Count; i++)
+                    {
+                        <tr>
+                            <td style="border-left:none !important;"><div>@ViewBag.ListCart[i].iMaHang</div></td>
+                            <td>
+                                <div class="">
+                                    @{
+                                        string ImagePath = "";
+                                        if (ViewBag.ListCart[i].sAnh != null) { ImagePath = "~/wwwroot/img/sanpham/" + ViewBag.ListCart[i].sAnh; }
+                                        else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                                    }
+                                    <img src="@Url.Content(ImagePath)" class="m-img-order" style="width: 60px; height: 60px;" />
+
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @ViewBag.ListCart[i].sTenHang
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+
+                                    @string.Format("{0:#,##}", ViewBag.ListCart[i].dDonGia) <u>đ</u>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @ViewBag.ListCart[i].gGiamGia%
+                                </div>
+                            </td>
+                          
+                            <td>
+                                <div>
+                                    <div>
+
+                                        @ViewBag.ListCart[i].iSoLuong
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @string.Format("{0:#,##}", ViewBag.ListCart[i].dThanhTien) <u>đ</u>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="m-account-ft-content">
+            <div class="flex-jc">
+                <div style="border-bottom: 3px solid #26845D; margin: 40px; width: 500px;"></div>
+            </div>
+            <div class="flex-jc">
+                <div class="flex-jsb" style="width: 400px;">
+                    <div style="font-size: 23px; font-weight: 500; color: #18543B;">Tổng tiền :</div>
+                    <div style="font-size: 23px; color: red;">
+                        @string.Format("{0:#,##}", @ViewBag.TongTien) <u>đ</u>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+

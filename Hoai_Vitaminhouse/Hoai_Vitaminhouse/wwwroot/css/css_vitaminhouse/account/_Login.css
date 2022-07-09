@@ -1,0 +1,94 @@
+﻿.m-title-login-account {
+    text-align: center;
+    color: #18543B;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 29px;
+    font-weight: 700;
+}
+form.m-login-account- {
+    border: 1px solid red;
+    padding: 30px;
+    margin-top: 70px;
+    border: 1px solid #e1e3e4;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+    width: 500px;
+}
+form.m-login-account- input{
+    font-size: 19px !important;
+}
+    form.m-login-account- input::placeholder {
+        font-style: italic;
+        font-size: 16px;
+    }
+
+    .grocino-form {
+        padding: 100px 35px 70px;
+        margin-top: -100px;
+    }
+
+    .grocino-form .form-signin input {
+        border: 1px solid #b7b7b7 !important;
+        padding: 17px 0 !important;
+    }
+
+        .form-signin input:focus {
+            border: 1px solid #73A33E !important;
+        }
+.form-signin-two input.form-control {
+    border: 1px solid #b7b7b7 !important;
+    padding: 25px 0 !important;
+    margin-bottom: 50px;
+}
+.form-signin-two span.text-danger{
+   font-size: 17px;
+}
+.grocino-form .form-signin-two .ui.form .field {
+    margin-bottom: 17px !important;
+}
+
+.form-signin-two input:focus {
+    border: 1px solid #73A33E !important;
+}
+        
+.grocino-form .ui.form .field {
+    margin-bottom: 25px;
+}
+
+    .grocino-form a {
+        font-weight: 500;
+    }
+
+        .grocino-form a:hover {
+            color: #18543b !important;
+            text-decoration: underline !important;
+        }
+
+        .grocino-form .btn:hover {
+            text-decoration: none !important;
+            color: #fff !important
+        }
+/* Thêm vào phần sửa tài khoản */
+.m-footer-login {
+    color: #677279;
+    font-size: 16px;
+    margin-bottom:5px;
+}
+    .m-footer-login span {
+        color: #73a33e;
+    }
+.m-button-login-fe {
+    background: #26845D;
+    outline-color: none;
+    border: none;
+    font-size: 23px;
+    font-weight: 600;
+    padding: 15px 0;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form.m-resss-fe{
+    width: 600px;
+}

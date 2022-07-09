@@ -1,0 +1,64 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Newspaper
+
+@{
+    ViewBag.Title = "Bạn chắc chắn muốn xóa tin tức #" + Model.NewspaperId+"?";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="flex-jc">
+    <div class="h-detail ">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex-jc">
+                @{
+                    string ImagePath = "";
+                    if (Model.NewspaperImage != null) { ImagePath = "~/wwwroot/img/newspapers/" + Model.NewspaperImage; }
+                    else { ImagePath = "~/wwwroot/img/newspapers/no-image-news.png"; }
+                }
+                <img src="@Url.Content(ImagePath)" class="m-img-order" style="width: 250px;" />
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã tin tức:</div>
+                <div>#@Model.NewspaperId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Tiêu đề tin tức:</div>
+                <div>@Model.NewspaperTitle</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Ngày tạo tin tức:</div>
+                <div>@Model.NewspaperDate</div>
+            </div>
+            <div class="h-detail-item">
+                <div class="h-detail-title">Chi tiết tin tức:</div>
+                <div class="h-detail-detail" style="max-width: 100%;">
+                    <p>@Model.NewspaperDescription</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-group-function-detail">
+            <div class="h-function-detail-item flex-jc">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-offset-2 col-md-12 text-center">
+                        <button type="submit" class="btn btn-danger" style="padding: 6px 20px;">
+                            Xóa tin tức
+                        </button> &nbsp; | &nbsp;
+
+                        @Html.ActionLink("Hủy", "Index")
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+        <div>
+            @if (ViewBag.ErrorDeleteNewspaper != null)
+            {
+                <br />
+                <div class="alert alert-danger" role="alert">@ViewBag.ErrorDeleteNewspaper</div>
+            }
+        </div>
+    </div>
+</div>

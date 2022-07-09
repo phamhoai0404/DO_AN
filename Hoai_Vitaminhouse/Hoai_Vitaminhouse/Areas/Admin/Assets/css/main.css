@@ -1,0 +1,143 @@
+/*--------------------------------------------------------------
+# Main
+--------------------------------------------------------------*/
+#main {
+	margin-top: 60px;
+	padding: 20px 30px;
+	transition: all 0.3s;
+	min-height: 83vh;
+	background-color: #FAFAFA;
+}
+	#main .content {
+		background-color: #FFFFFF;
+		
+		min-height: 60vh;
+		
+	}
+	#main .content2 {
+		background-color: #FFFFFF;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+
+	#main .chitiet {
+		background-color: #FFFFFF;
+		padding-top: 20px;
+		min-height: 60vh;
+		width: 600px;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin: 0px auto;
+		border-radius: 7px;
+	
+	}
+	#main .chitiet2 {
+		background-color: #FFFFFF;
+		padding-top: 20px;
+		min-height: 60vh;
+		width: 600px;
+		padding-left: 20px;
+		padding-right: 20px;
+		margin: 0px auto;
+		border-radius: 7px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	
+	}
+@media (max-width: 1199px) {
+	#main {
+		padding: 20px;
+	}
+}
+#main .content .title3 {
+	display: flex;
+	flex-direction: row-reverse;
+}
+/* ------------------------**/
+.breadcrumb {
+	font-size: 14px;
+	font-family: "Nunito", sans-serif;
+	color: #899bbd;
+	font-weight: 600;
+	padding-left: 20
+  }
+  .breadcrumb a {
+	color: #899bbd;
+	transition: 0.3s;
+  }
+  .breadcrumb a:hover {
+	color: blue;
+  }
+  .breadcrumb .breadcrumb-item::before {
+	color: #899bbd;
+  }
+  .breadcrumb .active {
+	color: #51678f;
+	font-weight: 600;
+  }
+
+
+/*--------------------------------------------------------------
+# Page Title
+--------------------------------------------------------------*/
+.pagetitle {
+	margin-bottom: 10px;
+}
+.card-title {
+	padding: 0px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #012970;
+	font-family: "Poppins", sans-serif;
+}
+.card-body {
+	padding: 20px 20px 20px 20px;
+	width: 70% !important;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 5px;
+	margin: auto;
+	box-shadow:  10px 10px 5px #AAA;
+	background: #F8FBEF;
+}
+
+.card-img-overlay {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+.card-body .card-icon {
+	font-size: 32px;
+	line-height: 0;
+	width: 64px;
+	height: 64px;
+	flex-shrink: 0;
+	flex-grow: 0;
+	
+}
+.card-body:hover {
+	background:#FBF5EF;
+	box-shadow:  11px 11px 6px #AAA;
+}
+.total-revenue .card-icon {
+	color: red;
+	background: #F8E0E0;
+}
+.total-products .card-icon{
+	color: #D7DF01;
+	background:#F2F5A9;
+}
+.total-products-sold .card-icon {
+	color: green;
+	background: #BCF5A9;
+}
+.total-accounts .card-icon {
+	color: blue;
+	background: #A9E2F3;
+}

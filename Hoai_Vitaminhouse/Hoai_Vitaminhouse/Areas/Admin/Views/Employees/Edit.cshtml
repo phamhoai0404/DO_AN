@@ -1,0 +1,110 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Account
+
+@{
+
+    ViewBag.Title = "Sửa quyền của nhân viên #" + Model.AccountId + " ?";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="flex-jc">
+    <div class="h-detail " style="padding: 20px 100px;">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã nhân viên:</div>
+                <div>#@Model.AccountId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Họ tên :</div>
+                <div>@Model.AccountName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Số điện thoại :</div>
+                <div>@Model.AccountPhone</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Email :</div>
+                <div>@Model.AccountEmail</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Địa chỉ :</div>
+                <div>@Model.AccountAddress</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Trạng thái :</div>
+                <div>
+                    @{
+                        string trangThai = "";
+                        if (Model.AccountStatus == true) { trangThai = "Hoạt động"; }
+                        else { trangThai = "Đang bị khóa"; }
+
+                    }
+
+                    @trangThai
+                </div>
+            </div>
+        </div>
+        <div class="h-group-function-detail">
+            <div class="h-function-detail-item ">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.AccountId);
+                    @Html.HiddenFor(model => model.AccountName);
+                    @Html.HiddenFor(model => model.AccountAddress);
+                    @Html.HiddenFor(model => model.AccountPhone);
+                    @Html.HiddenFor(model => model.AccountEmail);
+                    @Html.HiddenFor(model => model.AccountRole);
+                    @Html.HiddenFor(model => model.AccountStatus);
+                    @Html.HiddenFor(model => model.AccountPassword);
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="h-input-title">Quyền:</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <select id="Quyen" name="QuyenTaiKhoan" class="form-control">
+                                @for (int i = 0; i < ViewBag.CacQuyen.Count; i++)
+                                {
+                                    int temp = i + 2; //Vì ở trong mình đánh quyền là 1: Khách hàng, 2: nhân viên, 3:quản lý
+                                    if (Model.AccountRole == temp)
+                                    {
+                                        <option value="@i" selected>@ViewBag.CacQuyen[i]</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@ViewBag.CacQuyen[i]</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-2 col-md-12 text-center" style="padding-top:20px;">
+                        <button type="submit" class="btn btn-warning" style="padding: 6px 20px;">
+                            Cập nhật
+                        </button> &nbsp; | &nbsp;
+
+                        @Html.ActionLink("Hủy", "Index")
+                    </div>
+
+                }
+            </div>
+        </div>
+        <div>
+            @if (ViewBag.ErrorResetPasswordCustomer != null)
+            {
+                <br />
+                <div class="alert alert-danger" role="alert">@ViewBag.ErrorResetPasswordCustomer</div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

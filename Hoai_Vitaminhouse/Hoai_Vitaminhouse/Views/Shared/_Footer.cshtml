@@ -1,0 +1,75 @@
+﻿<!-- ======= Footer ======= -->
+<div class="m-footer" >
+    <div class="m-footer-top">
+        <div class="m-footer-left">
+            <a>
+                <img src="~/wwwroot/img/logos/logo_3.png" alt="" title="Vitaminhouse" class="img-fluid logo" width="100%" />
+            </a>
+            <p class="m-content-footer">
+                <b>Vitamin House</b> là thương hiệu chuyên cung cấp sỉ và lẻ các sản phẩm ngoại nhập như bánh kẹo, trái cây, nước uống, đồ ăn tươi sống, thực phẩm đóng hộp… được nhập khẩu chính hãng từ các quốc gia uy tín như Mỹ, Pháp, Úc, Hàn Quốc, Nhật Bản
+            </p>
+        </div>
+           
+        <div class="m-footer-center">
+            <h4>HỆ THỐNG CỬA HÀNG</h4>
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index","Home")">
+                        <b>CỬA HÀNG CMT8</b><br>
+                        ☎:0274 6568 777 📞: 0989 882 545<br>
+                        ĐC: 563 CMT8, P15, Q10, Tp. HCM.
+
+                    </a>
+                </li>
+                <br>
+                <li>
+                    <a href="@Url.Action("Index","Home")">
+                        <strong>CỬA HÀNG QUANG TRUNG</strong><br>
+                        ☎:02854 432 212 📞: 0984 741 875 <br>
+                        ĐC: 330 Quang Trung, P10, Q.Gò Vấp, Tp. HCM.
+                    </a>
+                </li>
+                <br>
+                <li>
+                    <a href="@Url.Action("Index","Home")">
+                        <strong>CỬA HÀNG PHẠM VIẾT CHÁNH</strong><br>
+                        ☎:02854 034 142 📞: 0989 882 545<br>
+                        ĐC: 219A Phạm Viết Chánh, P.Nguyễn Cư Trinh, Q.1, TP.HCM.
+                    </a>
+                </li>
+                <br>
+            </ul>
+        </div>
+       
+        <div class="m-footer-right" style="padding-right: 70px;">
+            <h4>LIÊN KẾT NHANH</h4>
+            <ul style="min-width: 180px;">
+                @if (Session["user"] == null)
+                {
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Đăng nhập", "Login", "Accounts")</li>
+                    <li>@Html.ActionLink("Đăng ký", "Register", "Accounts")</li>
+                    <li>@Html.ActionLink("Truy cập trang quản trị", "Access", "Admin")</li>
+                }
+                else
+                {
+                                    
+                    <li>@Html.ActionLink("Xem thông tin cá nhân", "Detail", "Accounts")</li>
+                    <li>@Html.ActionLink("Sửa tài khoản", "ChangeInfo", "Accounts")</li>
+                    <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Accounts")</li>
+                    <li>@Html.ActionLink("Đăng xuất", "Logout", "Accounts")</li>
+                    <li>@Html.ActionLink("Truy cập trang quản trị", "Access", "Admin")</li>
+                }
+            </ul>
+        </div>
+        
+    </div>
+
+    <div class="m-footer-bottom">
+        <div>
+            Copyright  <i class="far fa-copyright"></i> 2022 Phạm Thị Hoài
+        </div>
+    </div>
+
+</div>
+<!-- End Footer -->

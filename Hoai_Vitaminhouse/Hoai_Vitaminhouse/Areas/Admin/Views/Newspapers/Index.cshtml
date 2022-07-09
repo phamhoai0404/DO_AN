@@ -1,0 +1,97 @@
+﻿
+@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Newspaper>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách tin tức";
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section CSSPartial{
+    <link href="~/Areas/Admin/Assets/css/table.css" rel="stylesheet">
+}
+<div style="background: white; padding: 20px;">
+    <div class="row">
+        <div class="col-lg-12 mb-2 flex-jse">
+            <button type="button" class="btn" style="border: 2px solid #73a33e; ">
+                <a href="@Url.Action("Create","Newspapers")" style="color: #73a33e !important; font-weight: 700;">
+                    <i class="bi bi-plus-square-dotted"></i>
+                    Thêm tin tức
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="m-table-fe">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Ảnh</th>
+                        <th>Tiêu đề tin tức</th>
+                        <th>Ngày tạo </th>
+                        <th colspan="3" class="last">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="border-left:none !important;"><div><b>@item.NewspaperId</b></div></td>
+
+                        <td>
+                            <div>
+                                @{
+                                    string ImagePath = "";
+                                    if (item.NewspaperImage != null) { ImagePath = "~/wwwroot/img/newspapers/" + item.NewspaperImage; }
+                                    else { ImagePath = "~/wwwroot/img/Newspapers/no-image-news.png"; }
+                                }
+                                <img src="@Url.Content(ImagePath)" class="m-img-order" style="width: 50px; height: 50px;" />
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @item.NewspaperTitle
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @item.NewspaperDate.ToString(string.Format("dd/MM/yyyy"))
+                            </div>
+                        </td>
+
+
+                        <td class="m-table-function-s" title="Xem chi tiết tin tức">
+                            <a href="@Url.Action("Details","Newspapers",new {id = item.NewspaperId})">
+                                <i class="bi bi-eye-fill" style="color: blue;"></i>
+                            </a>
+                        </td>
+                        <td class="m-table-function-s" title="Sửa tin tức">
+                            <a href="@Url.Action("Edit","Newspapers",new {id = item.NewspaperId})">
+                                <i class="bi bi-pencil-fill" style="color: orange;"></i>
+                            </a>
+                        </td>
+                        <td class="m-table-function-s" title="Xóa tin tức">
+                            <a href="@Url.Action("Delete","Newspapers",new {id = item.NewspaperId})">
+                                <i class="bi bi-trash-fill" style="color: red;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row padding-table">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   })
+
+</div>

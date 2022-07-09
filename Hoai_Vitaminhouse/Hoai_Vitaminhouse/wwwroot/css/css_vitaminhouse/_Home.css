@@ -1,0 +1,105 @@
+﻿/* css index và introduce*/
+.m-home-title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #18543b;
+}
+
+    .m-home-title-group .m-home-title-1 {
+        font-size: 29px;
+        margin: 50px 0;
+    }
+
+    .m-home-title-group .m-home-title-2 {
+        font-size: 29px;
+        font-weight: 700;
+    }
+
+    .m-home-title-group .m-home-title-3 {
+        font-size: 19px;
+        font-weight: 500;
+        margin-top: 50px;
+    }
+
+.m-home-content {
+    margin: 20px 340px 0 340px;
+}
+
+    .m-home-content .m-home-child {
+        font-size: 19px;
+        text-align: justify;
+        color: #677279;
+        line-height: 30px;
+    }
+
+
+
+    .m-home-content .m-home-image {
+        display: flex;
+        justify-content: center;
+        margin: 50px 0;
+    }
+
+    .m-home-content .m-home-child .m-home-bolde {
+        font-size: 19px !important;
+        color: #677279;
+        font-weight: 600;
+    }
+        .m-home-content .m-home-child ul {
+            text-align: justify;
+            font-size: 19px !important;
+            color: #677279;
+            list-style-type: circle;
+        }
+            .m-home-content .m-home-child ul li {
+                margin-left: 40px;
+                padding-top: 10px;
+                line-height: 30px;
+            }
+/* css contact*/
+.m-contact-content{
+    padding: 0 170px;
+    margin: 70px 0px;
+}
+    .m-contact-content .m-contact-image {
+        width:280px !important;
+        height:185px !important;
+        margin-right:50px;
+    }
+    .m-contact-content .m-contact-item{
+        width:100%;
+        display:flex;
+    }
+    .m-contact-content .m-contact-image img {
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .m-contact-content .m-contact-item .m-conact-ct{
+        display:flex;
+        justify-content:space-between;
+        width:100%;
+    }
+    .m-contact-content .m-contact-item .m-conact-ct .m-contact-right{
+        display:flex;
+        align-items:center;
+    }
+.m-contact-item .m-conact-ct .m-contact-left .m-contact-name {
+    font-size: 20px;
+    font-weight:600;
+    text-align: justify;
+    color: #677279;
+    line-height: 30px;
+}
+.m-contact-item .m-conact-ct .m-contact-left .m-contact-address {
+    font-size: 20px;
+    text-align: justify;
+    color: #677279;
+    line-height: 30px;
+}
+.m-contact-item .m-conact-ct .m-contact-left .m-contact-work {
+    font-size: 19px;
+    text-align: justify;
+    color: #677279;
+    line-height: 30px;
+}

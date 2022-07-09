@@ -1,0 +1,170 @@
+﻿@model  Hoai_Vitaminhouse.Models.Order
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="breadcrumb-wrapper" class="breadcrumb-w-img" style="background-image: url(/wwwroot/img/products/bg_sanpham_6.jpg); ">
+    <div class="breadcrumb-overlay"></div>
+    <div class="breadcrumb-content">
+        <div class="wrapper">
+            <div style="text-align: center;">
+                <div class="breadcrumb-big">
+                    <h2 style="font-size: 38px;">
+                        ĐƠN HÀNG
+                    </h2>
+                </div>
+                <div class="breadcrumb-small" style="font-size: 20px; padding-top: 10px;">
+                    <a href="@Url.Action("Index","Home")" title="">TRANG CHỦ</a>
+                    <span aria-hidden="true">/</span>
+                    <span>ĐƠN HÀNG</span>
+                    <span aria-hidden="true">/</span>
+                    <span>CHI TIẾT ĐƠN HÀNG #@Model.OrderId</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="m-container-content" style="margin-left:90px; margin-right:90px">
+    <div class="flex-jsb">
+        <div class="m-account-ft-group" style="width:55%; min-width: 625px;">
+            <div class="m-account-ft-title">THÔNG TIN CHI TIẾT</div>
+            <div class="m-account-ft-content" style="width: 100% !important;">
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Mã đơn hàng: </div>
+                    <div class="m-account-detail-fs">#@Model.OrderId</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Họ tên người đặt: </div>
+                    <div class="m-account-detail-fs">@Model.Account.AccountName</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Số điện thoại người đặt: </div>
+                    <div class="m-account-detail-fs">@Model.Account.AccountPhone</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Họ tên người nhận: </div>
+                    <div class="m-account-detail-fs">@Model.OrderRecipientName</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Số điện thoại người nhận: </div>
+                    <div class="m-account-detail-fs">@Model.OrderRecipientPhone</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Ngày đặt hàng: </div>
+                    <div class="m-account-detail-fs">@Model.OrderDate</div>
+                </div>
+                <div class="m-account-item- flex-jsb" style="margin-bottom:5px;">
+                    <div class="m-account-title-">Địa chỉ nhận hàng: </div>
+                    <div class="m-account-detail-fs">@Model.OrderAddress</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="m-account-ft-group" style="width: 40%; min-width: 500px;">
+            <div class="m-account-ft-title">CHI TIẾT THANH TOÁN</div>
+            <div class="m-account-ft-content" style="width: 100% !important;">
+                    <div class="m-account-item- flex-jsb">
+                        <div class="m-account-title-">Trạng thái đơn hàng: </div>
+                        <div class="m-account-detail-fs">
+                            @{
+                                string tinhTrang = "";
+                                if (Model.OrderStatus == 1) { tinhTrang = "Chờ xử lý"; }
+                                else if (Model.OrderStatus == 2) { tinhTrang = "Đang giao"; }
+                                else if (Model.OrderStatus == 3) { tinhTrang = "Đã giao"; }
+                                else { tinhTrang = "Đã hủy"; }
+                            }
+                            @tinhTrang
+                        </div>
+                    </div>
+                    <div class="m-account-item- flex-jsb">
+                        <div class="m-account-title-">Tổng sản phẩm: </div>
+                        <div class="m-account-detail-fs">@ViewBag.SumOrderS</div>
+                    </div>
+                    <div class="m-account-item- flex-jsb">
+                        <div class="m-account-title-">Tổng tiền: </div>
+                        <div class="m-account-detail-fs">@string.Format("{0:#,##}", ViewBag.OrderSumPriceFirst) <u>đ</u></div>
+                    </div>
+                    <div class="m-account-item- flex-jsb">
+                        <div class="m-account-title-">Tổng giảm giá: </div>
+                        <div class="m-account-detail-fs">@string.Format("{0:#,##}", ViewBag.OrderSumPriceDiscount) <u>đ</u></div>
+                    </div>
+                    <div style="border-top: 3px solid #bbb;"></div>
+                    <div class="m-account-item- flex-jsb">
+                        <div class="m-account-title-" style="font-size: 22px;">THÀNH TIỀN: </div>
+                        <div class="m-account-detail-fs" style="color:red; font-size:25px;"> @string.Format("{0:#,##}", Model.OrderTotalMoney) <u>đ</u></div>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="m-account-ft-group" style="margin-top: 40px;">
+        
+        <div class="m-account-ft-content">
+            <table class="m-table-fe" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th class="first">Mã hàng</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Giảm giá (%)</th>
+                        <th>Số lượng mua</th>
+                        <th class="last"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @for (int i = 0; i < ViewBag.SanPhamsClient.Count; i++)
+                        {
+                            <tr>
+                                <td style="border-left:none !important;"><div>@ViewBag.SanPhamsClient[i].ProductId</div></td>
+                                <td >
+                                    <div class="" >
+                                        @{
+                                            string ImagePath = "";
+                                            if (ViewBag.SanPhamsClient[i].ProductImage != null) { ImagePath = "~/wwwroot/img/sanpham/" + @ViewBag.SanPhamsClient[i].ProductImage; }
+                                            else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                                        }
+                                        <img src="@Url.Content(ImagePath)" class="m-img-order" style="width: 60px; height: 60px;" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @ViewBag.SanPhamsClient[i].ProductName
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @string.Format("{0:#,##}", ViewBag.ChiTietDHClient[i].OrderDetailPrice) <u>đ</u>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @ViewBag.ChiTietDHClient[i].OrderDetailDiscount%
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>
+                                        @ViewBag.ChiTietDHClient[i].OrderDetailNumber
+                                    </div>
+                                </td>
+                                <td class="m-table-function-s" title="Xem chi tiết sản phẩm">
+                                    <a href="@Url.Action("Details","Products",new {id = ViewBag.SanPhamsClient[i].ProductId})">
+                                        <i class="fas fa-eye" style="color: #26845D;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div style="text-align:center; padding-top: 30px; font-size: 20px; color: blue; ">
+        <a>
+            @Html.ActionLink("Quay lại", "Detail", "Accounts")
+        </a>
+    </div>
+</div>

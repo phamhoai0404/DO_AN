@@ -1,0 +1,33 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Category
+
+@{
+    ViewBag.Title = "Chi tiết danh mục sản phẩm #" +Model.CategoryId ;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="flex-jc">
+    <div class="h-detail ">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã danh mục:</div>
+                <div>#@Model.CategoryId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Tên danh mục:</div>
+                <div>@Model.CategoryName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mô tả danh mục:</div>
+                <div class="h-detail-detail">
+                    <p >@Model.CategoryDescription</p>
+                </div>
+            </div>
+        </div>
+        <div class="h-group-function-detail">
+            <div class="h-function-detail-item flex-jc">
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@model Hoai_Vitaminhouse.Models.Newspaper
+
+@{
+
+    ViewBag.Title = "Sửa tin tức #" + Model.NewspaperId;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.NewspaperId)
+    @Html.HiddenFor(model => model.NewspaperDate)
+    <div class="chitiet" style="min-width: 100%; max-width: 100%;">
+        <div class="container h-product-create">
+
+            <div class="row">
+                <div class="col-12 ">
+                    @{
+                        string ImagePath = "";
+                        if (Model.NewspaperImage != null) { ImagePath = "~/wwwroot/img/newspapers/" + Model.NewspaperImage; }
+                        else { ImagePath = "~/wwwroot/img/newspapers/no-image-news.png"; }
+                    }
+                    <p class="flex-jc"><img id="hienThiAnh" width="250" src="@Url.Content(@ImagePath)" /></p>
+                    <p class="flex-jc"><label for="loadFile" style="cursor:pointer;"><b>Chọn ảnh tin tức</b></label></p>
+                    <p><input name="ImageFilesss" type="file" id="loadFile" style="display:none;" onchange="eventLoadFile(event)" /></p>
+                    @Html.HiddenFor(model => model.NewspaperImage, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 flex">
+                    <div class="h-input-title">Mã tin tức:</div>
+                    <div style="margin-left:10px;">#@Model.NewspaperId</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Tiêu đề tin tức:</div>
+                    @Html.EditorFor(model => model.NewspaperTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NewspaperTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Chi tiết tin tức: </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @Html.EditorFor(model => model.NewspaperDescription, new { htmlAttributes = new { @class = "form-control", @cols = 35, @rows = 10 } })
+                    @Html.ValidationMessageFor(model => model.NewspaperDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-warning">
+                        Sửa tin tức
+                    </button> &nbsp; | &nbsp;
+
+                    @Html.ActionLink("Hủy", "Index")
+
+                </div>
+                <br />
+
+            </div>
+            <div class="row mt-2">
+                @if (ViewBag.ErrorEditNewspaper != null)
+                {
+                    <br />
+                    <div class="alert alert-danger" role="alert">@ViewBag.ErrorEditNewspaper</div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .h-product-create .row .col-12 {
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    var eventLoadFile = function (event) {
+        var file = document.getElementById("loadFile").value;
+        var ext = file.substring(file.lastIndexOf('.') + 1);
+        if (ext == "") return true;
+        if (ext == "gif" || ext == "GIF" || ext == "PNG" || ext == "png" || ext == "jpg" || ext == "JPG" || ext == "bmp" || ext == "BMP") {
+            var imagessssssss = document.getElementById('hienThiAnh');
+            imagessssssss.src = URL.createObjectURL(event.target.files[0]);
+            return true;
+        }
+        else {
+            document.getElementById("loadFile").value = null;
+            alert("Chỉ upload file ảnh!");
+            fup.focus();
+            return false;
+        }
+    };
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

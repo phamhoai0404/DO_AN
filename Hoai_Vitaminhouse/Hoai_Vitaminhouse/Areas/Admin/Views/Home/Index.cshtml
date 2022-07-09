@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Thống kê";
+    ViewBag.Link = "";
+    ViewBag.Name = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content">
+    <div class="h-group-home">
+        <div class="h-home-item flex">
+            <div class="h-home-left">
+                <div class="h-home-icon flex-jc-ac">
+                    <i class="bi bi-currency-dollar"></i>
+                </div>
+            </div>
+            <div class="h-home-right">
+                <div class="h-home-item-title">Tổng doanh thu</div>
+                <div class="h-home-item-content"> @string.Format("{0:#,##}", ViewBag.DoanhThu)<u>đ</u></div>
+            </div>
+        </div>
+        <div class="h-home-item flex">
+            <div class="h-home-left">
+                <div class="h-home-icon flex-jc-ac">
+                    <i class="bi bi-cart"></i>
+                </div>
+            </div>
+            <div class="h-home-right">
+                <div class="h-home-item-title">Đơn hàng đang chờ xử lý</div>
+                <div class="h-home-item-content">@ViewBag.DonHangDangGiao</div>
+            </div>
+        </div>
+        <div class="h-home-item flex">
+            <div class="h-home-left">
+                <div class="h-home-icon flex-jc-ac">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+            </div>
+            <div class="h-home-right">
+                <div class="h-home-item-title">Sản phẩm tồn kho</div>
+                <div class="h-home-item-content"> @string.Format("{0:#,##}", ViewBag.SanPhamTrongDB)</div>
+            </div>
+        </div>
+        <div class="h-home-item flex">
+            <div class="h-home-left">
+                <div class="h-home-icon flex-jc-ac">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+            </div>
+            <div class="h-home-right">
+                <div class="h-home-item-title">Tài khoản khách hàng</div>
+                <div class="h-home-item-content">@ViewBag.SoTaiKhoanKH</div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>

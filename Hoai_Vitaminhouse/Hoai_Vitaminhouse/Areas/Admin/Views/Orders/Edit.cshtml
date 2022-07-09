@@ -1,0 +1,112 @@
+﻿@model Hoai_Vitaminhouse.Models.Order
+
+@{
+
+    ViewBag.Title = "Sửa tình trạng đơn hàng #" + Model.OrderId;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.OrderId)
+    @Html.HiddenFor(model => model.AccountId)
+    @Html.HiddenFor(model => model.OrderRecipientPhone)
+    @Html.HiddenFor(model => model.OrderRecipientName)
+    @Html.HiddenFor(model => model.OrderDate)
+    @Html.HiddenFor(model => model.OrderNotes)
+    @Html.HiddenFor(model => model.OrderTotalMoney)
+    @Html.HiddenFor(model => model.OrderStatus)
+
+
+    <div class="chitiet">
+        <div class="container h-product-create">
+            <div class="row">
+                <div class="col-12 flex">
+                    <div class="h-input-title">Mã đơn hàng:</div>
+                    <div style="margin-left:10px;">#@Model.OrderId  @ViewBag.OrderAddressError</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Tên khách hàng:</div>
+                    @Html.EditorFor(model => model.Account.AccountName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">SĐT khách hàng: </div>
+                    @Html.EditorFor(model => model.Account.AccountPhone, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Tên người nhận:</div>
+                    @Html.EditorFor(model => model.OrderRecipientName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">SĐT người nhận: </div>
+                    @Html.EditorFor(model => model.OrderRecipientPhone, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Địa chỉ nhận hàng: </div>
+                    @Html.EditorFor(model => model.OrderAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 flex">
+                    <div class="h-input-title">Thành tiền: </div>
+                    <div style="margin-left: 10px;"> @string.Format("{0:#,##}", @Model.OrderTotalMoney)<u>đ</u></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Tình trạng đơn hàng: </div>
+                    <select id="TinhTrang" name="TinhTrang" class="form-control">
+                        @for (int i = 1; i <= ViewBag.TinhTrangDH.Count; i++)
+                        {
+                            if (Model.OrderStatus == i)
+                            {
+                                <option value="@i" selected>@ViewBag.TinhTrangDH[i - 1]</option>
+                            }
+                            else
+                            {
+                                <option value="@i">@ViewBag.TinhTrangDH[i - 1]</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success">
+                        Sửa
+                    </button> &nbsp; | &nbsp;
+
+                    @Html.ActionLink("Hủy", "Index")
+
+                </div>
+                <br />
+
+            </div>
+
+        </div>
+    </div>
+}
+<style>
+    .h-product-create .row .col-12 {
+        margin-bottom: 10px;
+    }
+</style>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

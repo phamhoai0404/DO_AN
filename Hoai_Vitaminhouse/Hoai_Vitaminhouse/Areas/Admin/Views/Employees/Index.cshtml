@@ -1,0 +1,139 @@
+﻿@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Account>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách tài khoản nhân viên";
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section CSSPartial{
+    <link href="~/Areas/Admin/Assets/css/table.css" rel="stylesheet">
+}
+<div style="background: white; padding: 20px;">
+    <div class="row">
+        <div class="col-lg-12 mb-2 flex-jse">
+            <button type="button" class="btn" style="border: 2px solid #73a33e; ">
+                <a href="@Url.Action("Create","Employees")" style="color: #73a33e !important; font-weight: 700;">
+                    <i class="bi bi-plus-square-dotted"></i>
+                    Thêm nhân viên
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="m-table-fe">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Tên nhân viên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+                        <th>Quyền</th>
+                        <th colspan="3" class="last">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="border-left:none !important;"><b>@item.AccountId</b></td>
+
+
+                            <td>
+                                <div>
+                                    @item.AccountName
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @item.AccountPhone
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @item.AccountEmail
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @item.AccountAddress
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @{ if (item.AccountStatus == true)
+                                        {
+
+                                            <input onclick="ChangeAccountStatus(@item.AccountId)" type="checkbox" checked style="width:17px; height:17px;" />
+
+                                        }
+                                        else
+                                        {
+                                            <input onclick="ChangeAccountStatus(@item.AccountId)" type="checkbox" style="width:17px; height:17px;" />
+                                        }
+                                    }
+                                </div>
+
+                            </td>
+                            <td>
+                                @{
+                                    string quyen = "";
+                                    if (item.AccountRole == 2) { quyen = "Nhân viên"; }
+                                    if (item.AccountRole == 3) { quyen = "Quản lý"; }
+
+                                }
+
+                                @quyen
+                            </td>
+
+                            <td class="m-table-function-s" title="Sửa quyền tài khoản">
+                                <a href="@Url.Action("Edit","Employees",new {id = item.AccountId})">
+                                    <i class="bi bi-pencil-fill" style="color: orangered;"></i>
+                                </a>
+                            </td>
+                            <td class="m-table-function-s" title="Cấp lại mật khẩu">
+                                <a href="@Url.Action("ResetPassword","Employees",new {id = item.AccountId})">
+                                    <i class="bi bi-unlock-fill" style="color: orange;"></i>
+                                </a>
+                            </td>
+                            <td class="m-table-function-s" title="Xóa nhân viên">
+                                <a href="@Url.Action("Delete","Employees",new {id = item.AccountId})">
+                                    <i class="bi bi-trash-fill" style="color: red;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row padding-table">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   })
+
+</div>
+
+
+
+<script>
+    const ChangeAccountStatus = async (id) => {
+        const url = `/Admin/Employees/ChangeStatus?id=${id}`;
+        const formData = new FormData();
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+    }
+</script>

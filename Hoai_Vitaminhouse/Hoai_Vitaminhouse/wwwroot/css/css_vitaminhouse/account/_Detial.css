@@ -1,0 +1,42 @@
+﻿.m-account-ft-group {
+    border: 1px solid #e1e3e4;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 30%);
+    padding: 30px;
+}
+    .m-account-ft-group .m-account-ft-title {
+        font-size: 24px;
+        color: #18543B;
+        font-weight: 500;
+    }
+    .m-account-ft-group .m-account-item- {
+        margin: 25px 0;
+        font-size: 19px;
+        color: #677279;
+    }
+.m-account-item- .m-account-title- {
+    font-weight: 500;
+    color: #18543B;
+}
+    .flex-jsb{
+    display: flex;
+    justify-content:space-between;
+}
+.m-account-fs-left{
+    width: 65%;
+}
+.m-account-function {
+    display: flex;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 18px;
+    color: white !important;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.m-account-fs-right {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+

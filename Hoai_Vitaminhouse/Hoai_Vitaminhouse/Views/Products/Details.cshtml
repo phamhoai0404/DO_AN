@@ -1,0 +1,130 @@
+﻿@model  Hoai_Vitaminhouse.Models.Product
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="m-title-ca" style="margin-left: 90px;">
+        <a  href="@Url.Action("Index", "Home")" class="m-title-2" >Trang chủ</a>&nbsp;
+        <i class="fas fa-chevron-right"></i> &nbsp;
+        <a href="@Url.Action("Details","Categories",new { id = Model.Category.CategoryId})"  class="m-title-2" >@Model.Category.CategoryName</a> &nbsp;
+        <i class="fas fa-chevron-right"></i> &nbsp;
+        <div>@Model.ProductName</div> &nbsp;
+
+    </div>
+    <div class="m-product-detail">
+        <div class="m-product-top">
+            <div class="m-product-group-img" style="position:relative;">
+                <div class="m-product-img-detail" >
+                    @{
+                        string ImagePath = "";
+                        if (Model.ProductImage != null) { ImagePath = "~/wwwroot/img/sanpham/" + Model.ProductImage; }
+                        else { ImagePath = "~/wwwroot/img/sanpham/no-image-news.png"; }
+                    }
+                    <img src="@Url.Content(ImagePath)" />
+                </div>
+                @if (Model.ProductDiscount > 0)
+                { 
+                    <div class="m-pr-discount">
+                        <div class="m-pr-title-discount">GIẢM</div>
+                        <div class="m-pr-number-discount">
+                            @Model.ProductDiscount%
+                        </div>
+                    </div>
+                 }
+                
+            </div>
+            <div class="m-product-content-detail">
+                <div class="m-pd-top">
+                    <div class="m-pd-name"> @Model.ProductName</div>
+                    <div class="m-pd-provider">@Model.ProductProviders</div>
+                </div>
+                <div style="border-bottom: 1px solid #e1e3e4; margin: 24px 0; "></div>
+                <div class="m-pd-bottom">
+                    <div class="m-pr-item">
+                        <div class="m-pr-name-">Tình trạng:</div>
+                          @if (Model.ProductNumber > 0)
+                          {
+                              <div style="display:flex; align-items:center;">
+                                <div class="m-pr-status-has-icon"></div>
+                                <div class="m-pr-status-has-title">Còn hàng</div>
+                              </div>
+                          }
+                          else { 
+                              <div style="display:flex; align-items:center;">
+                                <div class="m-pr-status-no-icon"></div>
+                                <div class="m-pr-status-no-title">Hết hàng</div>
+                              </div>
+                          }  
+                    </div>
+                    <div class="m-pr-item">
+                        <div class="m-pr-name-">Đơn vị:</div>
+                        <div class="m-pr-unit">@Model.ProductUnit</div>
+                    </div>
+                   
+                    <div class="m-pr-item">
+                        <div class="m-pr-name-">Giá:</div>
+                        <div style="display:flex;">
+                            @if (Model.ProductDiscount > 0)
+                            {
+                              
+                                decimal priceDiscount = (decimal)Model.ProductDiscount * Model.ProductPrice / 100;
+                                decimal priceLast = Model.ProductPrice - priceDiscount;
+
+                                <div class="m-pr-price-last">@string.Format("{0:#,##}", priceLast) <u>đ</u></div>
+                                <div class="m-pr-price-first"> @string.Format("{0:#,##}", Model.ProductPrice) <u>đ</u></div>
+                            }
+                            else
+                            {
+                                <div class="m-pr-price-last"> @string.Format("{0:#,##}", Model.ProductPrice) <u>đ</u></div>
+                            }
+
+
+                        </div>
+                    </div>
+                    <div class="m-fucntion-pr-group">
+                        @if (Model.ProductNumber > 0)
+                        {
+                            <a href=@Url.Action("ThemGioHang", "Cart", new { iMaHang = Model.ProductId, strURL = Request.Url.ToString() }) class="m-function-item-pr" style="background: #26845D;">
+
+                                <i class="fas fa-shopping-cart"></i> &nbsp;&nbsp;
+                                <div>
+                                    Thêm vào giỏ
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="" class="m-function-item-pr" style="background: #26845D; opacity: 0.8;">
+                                <div>
+                                    Hết hàng
+                                </div>
+                            </a>
+                        }
+
+                        <a href="@Url.Action("Details","Categories",new { id = Model.Category.CategoryId})" class="m-function-item-pr" style="background: #73a33e;">
+                            <i class="fas fa-long-arrow-alt-left"></i> &nbsp;&nbsp;
+                            <div>
+                                Xem sản phẩm khác
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="m-pd-finish">
+                    <div>
+                        <div class="m-pd-title-"><i class="fas fa-check-circle"></i>Ship COD Toàn quốc</div>
+                        <div class="m-pd-title-"><i class="fas fa-check-circle"></i>Ship nhanh trong ngày TP.HCM</div>
+                        <div class="m-pd-title-"><i class="fas fa-check-circle"></i>Thiết kế và gói quà tặng</div>
+                        <div class="m-pd-title-"><i class="fas fa-check-circle"></i>Cung cấp hàng giá sỉ cho shop</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-product-bottom">
+            <div class="m-pr-description">Mô tả</div>
+            <p class="m-descr">
+                @Model.ProductDescription
+            </p>
+            <p class="m-descr"> * * * </p>
+        </div>
+    </div>

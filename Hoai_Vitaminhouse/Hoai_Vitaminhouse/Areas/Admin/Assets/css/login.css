@@ -1,0 +1,51 @@
+﻿.h-login {
+    color: #73A33E;
+    margin-top: 8px;
+}
+.h-login:hover{
+    cursor: pointer;
+}
+.h-button-login {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input.form-control {
+    font-size: 18px;
+}
+input.form-control:focus {
+    padding: 0 20px;
+    font-size: 18px;
+}
+    input.form-control:-webkit-autofill { 
+        -webkit-box-shadow: 0 0 0 100px #F0FFDF inset !important;
+        box-shadow: 0 0 0 100px #F0FFDF inset !important;
+    }
+        input.form-control:-webkit-autofill:focus {
+            border-color: #73A33E !important;
+        }
+.h-login-group-footer {
+    margin-top: 15px;
+    font-size:16px;
+}
+
+    .h-login-group-footer .h-login-item-footer {
+        padding: 2px 0;
+        display: flex;
+        height: 28px; 
+        box-sizing:border-box;
+
+    }
+        .h-login-group-footer .h-login-item-footer a {
+            font-size: 16px;
+            color: #73a33e;
+            font-weight: 500;
+            text-decoration:none;
+        }
+            .h-login-group-footer .h-login-item-footer a:hover {
+                font-size: 17px;
+                color: #18543b !important;
+                text-decoration: underline !important;
+            }

@@ -1,0 +1,58 @@
+﻿@model Hoai_Vitaminhouse.Models.Category
+
+@{
+
+    ViewBag.Title = "Thêm danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="chitiet">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Tên danh mục:</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })<br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="h-input-title">Mô tả danh mục: </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @Html.EditorFor(model => model.CategoryDescription, new { htmlAttributes = new { @class = "form-control", @cols = 35, @rows = 10 } })
+                    @Html.ValidationMessageFor(model => model.CategoryDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-success">
+                        Thêm
+                    </button> &nbsp; | &nbsp;
+
+                    @Html.ActionLink("Hủy", "Index")
+
+                </div>
+                <br />
+
+            </div>
+            <div class="row mt-5">
+                @if (ViewBag.ErrorCreateDanhMuc != null)
+                {
+                    <br/>
+                    <div class="alert alert-danger" role="alert">@ViewBag.ErrorCreateDanhMuc</div>
+                }
+            </div>
+        </div>
+    </div>
+}

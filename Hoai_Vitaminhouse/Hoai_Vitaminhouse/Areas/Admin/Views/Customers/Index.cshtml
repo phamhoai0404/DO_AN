@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<Hoai_Vitaminhouse.Models.Account>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách tài khoản khách hàng";
+
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section CSSPartial{
+    <link href="~/Areas/Admin/Assets/css/table.css" rel="stylesheet">
+}
+<div style="background: white; padding: 20px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="m-table-fe">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Tên khách hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th colspan="3" class="last">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td style="border-left:none !important;"><b>@item.AccountId</b></td>
+                       
+
+                        <td>
+                            <div>
+                                @item.AccountName
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @item.AccountPhone
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @{ if (item.AccountStatus == true)
+                                    {
+
+                                        <input onclick="Change(@item.AccountId)" type="checkbox" checked style="width:17px; height:17px;"/>
+
+                                    }
+                                    else
+                                    {
+                                        <input onclick="Change(@item.AccountId)" type="checkbox" style="width:17px; height:17px;" />
+                                    }
+                                }
+                            </div>
+
+                            </td>
+                       
+
+                        <td class="m-table-function-s" title="Xem chi tiết khách hàng">
+                            <a href="@Url.Action("Details","Customers",new {id = item.AccountId})">
+                                <i class="bi bi-eye-fill" style="color: blue;"></i>
+                            </a>
+                        </td>
+                        <td class="m-table-function-s" title="Cấp lại mật khẩu">
+                            <a href="@Url.Action("ResetPassword","Customers",new {id = item.AccountId})">
+                                <i class="bi bi-unlock-fill" style="color: orange;"></i>
+                            </a>
+                        </td>
+                        <td class="m-table-function-s" title="Xóa khách hàng">
+                            <a href="@Url.Action("Delete","Customers",new {id = item.AccountId})">
+                                <i class="bi bi-trash-fill" style="color: red;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row padding-table">
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions()
+   {
+       UlElementClasses = new string[] { "store-pagination" },
+   })
+
+</div>
+
+
+
+<script>
+    const Change = async (id) => {
+        const url = `/Admin/Customers/ChangeStatus?id=${id}`;
+        const formData = new FormData();
+        const response = await fetch(url, {
+            method: 'POST',
+            body: formData
+        });
+    }
+</script>

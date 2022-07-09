@@ -1,0 +1,22 @@
+﻿.m-np-title {
+    font-size: 37px;
+    color: #18543b;
+    font-weight: 500;
+    line-height: 50px;
+    text-align: justify;
+}
+.m-right-newspaper .m-np-img {
+    max-width: 100%;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+
+}
+.m-fo-np {
+    color: #73a33e !important;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 40px 0;
+}

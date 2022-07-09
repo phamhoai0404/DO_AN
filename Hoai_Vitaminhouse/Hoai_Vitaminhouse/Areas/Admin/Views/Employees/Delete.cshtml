@@ -1,0 +1,75 @@
+﻿
+@model Hoai_Vitaminhouse.Models.Account
+
+@{
+
+    ViewBag.Title = "Bạn xóa tài khoản nhân viên #" + Model.AccountId + " ?";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="flex-jc">
+    <div class="h-detail " style="padding: 20px 100px; margin-top:30px;">
+        <div class="h-group-detail">
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Mã nhân viên:</div>
+                <div>#@Model.AccountId</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Họ tên :</div>
+                <div>@Model.AccountName</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Số điện thoại :</div>
+                <div>@Model.AccountPhone</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Email :</div>
+                <div>@Model.AccountEmail</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Địa chỉ :</div>
+                <div>@Model.AccountAddress</div>
+            </div>
+            <div class="h-detail-item flex">
+                <div class="h-detail-title">Trạng thái :</div>
+                <div>
+                    @{
+                        string trangThai = "";
+                        if (Model.AccountStatus == true) { trangThai = "Hoạt động"; }
+                        else { trangThai = "Đang bị khóa"; }
+
+                    }
+
+                    @trangThai
+                </div>
+            </div>
+        </div>
+        <div class="h-group-function-detail">
+            <div class="h-function-detail-item flex-jc">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-offset-2 col-md-12 text-center">
+                        <button type="submit" class="btn btn-danger">
+                            Xóa tài khoản
+                        </button> &nbsp; | &nbsp;
+
+                        @Html.ActionLink("Hủy", "Index")
+                    </div>
+
+                }
+            </div>
+        </div>
+        <div>
+            @if (ViewBag.ErrorDeleteEmployee != null)
+            {
+                <br />
+                <div class="alert alert-danger" role="alert">@ViewBag.ErrorDeleteEmployee</div>
+            }
+        </div>
+    </div>
+
+</div>
+

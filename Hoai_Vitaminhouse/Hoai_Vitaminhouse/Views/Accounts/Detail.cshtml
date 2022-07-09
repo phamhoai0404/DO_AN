@@ -1,0 +1,126 @@
+﻿@model  Hoai_Vitaminhouse.Models.Account
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="breadcrumb-wrapper" class="breadcrumb-w-img" style="background-image: url(/wwwroot/img/products/bg_sanpham_6.jpg); ">
+    <div class="breadcrumb-overlay"></div>
+    <div class="breadcrumb-content">
+        <div class="wrapper">
+            <div style="text-align: center;">
+                <div class="breadcrumb-big">
+                    <h2 style="font-size: 38px;">
+                        TÀI KHOẢN
+                    </h2>
+                </div>
+                <div class="breadcrumb-small" style="font-size: 20px; padding-top: 10px;">
+                    <a href="@Url.Action("Index","Home")" title="">TRANG CHỦ</a>
+                    <span aria-hidden="true">/</span>
+                    <span>TÀI KHOẢN</span>
+                    <span aria-hidden="true">/</span>
+                    <span>THÔNG TIN TÀI KHOẢN</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="m-container-content" style="margin-left:90px; margin-right:90px">
+    <div class="m-account-ft-group" style="margin: 0 270px;">
+        <div class="m-account-ft-title">THÔNG TIN TÀI KHOẢN</div>
+        <div class="m-account-ft-content flex-jsb">
+            <div class="m-account-fs-left">
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Họ và tên: </div>
+                    <div class="m-account-detail-fs">@Model.AccountName</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Số điện thoại: </div>
+                    <div class="m-account-detail-fs">@Model.AccountPhone</div>
+                </div>
+                <div class="m-account-item- flex-jsb">
+                    <div class="m-account-title-">Địa chỉ email: </div>
+                    <div class="m-account-detail-fs">@Model.AccountEmail</div>
+                </div>
+                <div class="m-account-item- flex-jsb" style="margin-bottom:5px;">
+                    <div class="m-account-title-">Địa chỉ: </div>
+                    <div class="m-account-detail-fs">@Model.AccountAddress</div>
+                </div>
+            </div>
+            <div class="m-account-fs-right">
+                <a href="@Url.Action("ChangeInfo", "Accounts")" class="m-account-function" style="background: #F0FFF9; border: 1px solid #26845D; color: #26845D !important; ">Cập nhật thông tin</a>
+                <div style="height: 15px;"></div>
+                <a href="@Url.Action("ChangePassword", "Accounts")" class="m-account-function" style="border: 1px solid #73a33e; color: #73a33e !important; ">Đổi mật khẩu</a>
+            </div>
+        </div>
+    </div>
+    <div class="m-account-ft-group" style="margin-top: 40px;">
+        <div class="m-account-ft-title">LỊCH SỬ MUA HÀNG</div>
+        <div class="m-account-ft-content">
+        @if(ViewBag.listDonHangByMaTK.Count !=0) { 
+            <table class="m-table-fe" style="margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th class="first">Mã</th>
+                        <th>Địa chỉ giao hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày đặt</th>
+                        <th>Trạng thái</th>
+                        <th class="last">Xem chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < ViewBag.listDonHangByMaTK.Count; i++)
+                    {
+                        <tr>
+                            <td style="border-left:none !important;"><div>@ViewBag.listDonHangByMaTK[i].OrderId</div></td>
+                            <td>
+                                <div>
+                                    @ViewBag.listDonHangByMaTK[i].OrderAddress
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @string.Format("{0:#,##}", ViewBag.listDonHangByMaTK[i].OrderTotalMoney) <u>đ</u>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @ViewBag.listDonHangByMaTK[i].OrderDate
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    @{
+                                        string tinhTrang = "";
+                                        if (ViewBag.listDonHangByMaTK[i].OrderStatus == 1) { tinhTrang = "Chờ xử lý"; }
+                                        else if (ViewBag.listDonHangByMaTK[i].OrderStatus == 2) { tinhTrang = "Đang giao"; }
+                                        else if (ViewBag.listDonHangByMaTK[i].OrderStatus == 3) { tinhTrang = "Đã giao"; }
+                                        else { tinhTrang = "Đã hủy"; }
+                                    }
+                                    @tinhTrang
+                                </div>
+                            </td>
+                            <td class="m-table-function-s">
+                                <a href="@Url.Action("Index","Orders",new {id = @ViewBag.listDonHangByMaTK[i].OrderId })">
+                                    <i class="fas fa-eye" style="color: #26845D;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+
+
+                    </tbody>
+            </table>
+        }
+        else { 
+              <div style="text-align:center; font-size: 19px;color: #677279; padding-top: 20px;">Bạn chưa mua hàng của cửa hàng!</div>
+        }
+      </div>
+       
+        </div>
+ 
+</div>
+

@@ -1,0 +1,12 @@
+﻿.header-nav .nav-profile {
+    color: #18543B !important;
+}
+
+    .header-nav .nav-profile img {
+        max-height: 36px;
+    }
+
+    .header-nav .nav-profile span {
+        font-size: 16px;
+        font-weight: 600;
+    }

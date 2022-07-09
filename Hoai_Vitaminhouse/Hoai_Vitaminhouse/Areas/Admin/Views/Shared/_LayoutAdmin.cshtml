@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Thiết lập chung -->
+    @{
+        Html.RenderPartial("_TitleHeadAdmin");
+    }
+
+
+    <!-- Template Main CSS File -->
+    <link href="~/Areas/Admin/Assets/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Assets/css/footer.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Assets/css/main.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Assets/css/header.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Assets/css/slide-bar.css" rel="stylesheet">
+
+    <!-- Template CSSPartial File -->
+    @RenderSection("CSSPartial", required: false)
+
+
+</head>
+
+<body>
+   
+    <!-- ======= Header ======= -->
+    @{
+        Html.RenderAction("_HeaderAdmin","Home");
+    }
+    <!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    @{
+        Html.RenderPartial("_SidebarAdmin");
+    }
+    <!-- End Sidebar-->
+    <!-- ======= Main ======= -->
+    <main id="main" class="main">
+        <div class="container">
+            @{
+                Html.RenderPartial("_PageTitleAdmin");
+            }
+            <!-- End Page Title -->
+
+            
+                @RenderBody()
+            
+        </div>
+    </main>
+    <!-- End #main -->
+    <!-- ======= Footer ======= -->
+    @{
+        Html.RenderPartial("_FooterAdmin");
+    }
+    <!-- End Footer -->
+    <!-- Vendor JS Files -->
+    <script src="~/Areas/Admin/Assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/Areas/Admin/Assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Hoai_Vitaminhouse.Models.Category>
+
+<header id="header" class="fixed-top">
+    <div class="p1 m-logo-fe">
+        <div class="container d-flex align-items-center ">
+            <a href="@Url.Action("Index","Home")" class="logo me-auto "><img src="~/wwwroot/img/logos/logo_3.png" alt="" style='max-width:140px' ></a>
+        </div>
+    </div>
+    <div class="p2">
+        <ul id="menu">
+            <div class="inner">
+                <div class="header-navbar-wrapper">
+                    <div class="header-navbar text-right">
+                        <ul class="no-bullets">
+                            <li><a href="@Url.Action("Index", "Home")"><span class="m-title-navbar">TRANG CHỦ</span></a></li>
+                            <li>
+                                <a><span class="m-title-navbar">DANH MỤC SẢN PHẨM&nbsp;<i class="bi bi-chevron-down" style="color:white !important;"></i></span> </a>
+                                <ul class="m-catogory">
+                                    @foreach (var item in Model)
+                                        {
+                                            <li><a href="@Url.Action("Details","Categories",new { id = item.CategoryId})"><span>@item.CategoryName</span></a></li>
+                                         }
+                                    
+
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Index", "Newspapers")"><span class="m-title-navbar">BLOG VITAMIN</span></a></li>
+                            <li><a href="@Url.Action("Introduce", "Home")"><span class="m-title-navbar">GIỚI THIỆU</span></a></li>
+                            <li><a href="@Url.Action("Contact", "Home")"><span class="m-title-navbar">LIÊN HỆ</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ul>
+        
+          </div>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+        <a>
+            <form class="m-form-search" action="/Products/FindProducts">
+                <input type="text" id="keyword" name="keyword" placeholder="Tìm kiếm sản phẩm..." />
+                <div class="m-icon-search">
+                    <div>
+                        <i class="fas fa-search" onclick="onSearch()"></i>
+                    </div>
+                </div>
+            </form>
+        </a>
+
+
+        <ul class="dropdown">
+            <a href="@Url.Action("Detail","Accounts")" ><span><i class="fas fa-user icons"></i></span></a>
+            <ul>
+                @if (Session["user"] == null)
+                 {
+                    <li>@Html.ActionLink("ĐĂNG NHẬP", "Login", "Accounts")</li>
+                    <li>@Html.ActionLink("ĐĂNG KÝ", "Register", "Accounts")</li>
+                 }
+                else
+                {
+                    <li>@Html.ActionLink("XEM THÔNG TIN CÁ NHÂN", "Detail", "Accounts")</li>
+                    <li>@Html.ActionLink("SỬA TÀI KHOẢN", "ChangeInfo", "Accounts")</li>
+                    <li>@Html.ActionLink("ĐỔI MẬT KHẨU", "ChangePassword", "Accounts")</li>
+                    <li>@Html.ActionLink("ĐĂNG XUẤT", "Logout", "Accounts")</li>
+                }
+                <li>@Html.ActionLink("TRUY CẬP TRANG QUẢN TRỊ", "Access", "Admin")</li>
+            </ul>
+        </ul>
+
+        <a href="@Url.Action("Index","Cart")" style="position:relative">
+            <i class="fas fa-cart-plus icons"></i>
+            <span class="m-icon-cart">
+                @ViewBag.SoLuongGioHang
+                
+            </span>
+        </a>
+        <!-- .navbar -->
+    </nav>
+
+</header>
+<script>
+    const onSearch = () => {
+        const keyword = document.getElementById("keyword").value;
+        window.location = `/Products/FindProducts?keyword=${keyword}`;
+    }
+</script>
